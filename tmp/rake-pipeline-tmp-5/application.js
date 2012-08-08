@@ -1,12 +1,12 @@
 minispade.register('todos/templates/application', function() {Ember.TEMPLATES['application']=Ember.Handlebars.compile("<h1>Todos</h1>\n{{outlet}}\n");
 });minispade.register('todos/templates/main_view', function() {Ember.TEMPLATES['main_view']=Ember.Handlebars.compile("{{view Todos.CreateTodoView id=\"new-todo\" placeholder=\"What needs to be done?\"}}\n\n<div id=\"stats\">\n  {{#view Ember.Button target=\"Todos.TodosController\" action=\"clearCompletedTodos\"}}\n    Clear Completed Todos\n  {{/view}}\n\n  {{Todos.todosController.remaining}} remaining\n</div>\n\n{{view Ember.Checkbox class=\"mark-all-done\"\n  title=\"Mark All as Done\"\n  disabledBinding=\"Todos.TodosController.isEmpty\"\n  valueBinding=\"Todos.TodosController.allAreDone\"}}\n\n<ul>\n{{#each Todos.TodosController.content}}\n  <li {{bindAttr class=\"isDone\"}}>\n    {{view Ember.Checkbox titleBinding=\"title\" valueBinding=\"isDone\"}}\n  </li>\n{{/each}}\n</ul>\n");
-});minispade.register('todos/app', function() {Todos = Ember.Application.create();
-minispade.require('todos/router/main');
+});minispade.register('todos/app', function() {minispade.require('todos/router/main');
 minispade.require('todos/controllers/main');
 minispade.require('todos/templates/main');
 minispade.require('todos/models/main');
 minispade.require('todos/views/main');
 
+Todos = Ember.Application.create();
 Todos.initialize();
 
 });minispade.register('todos/controllers/application_controller', function() {Todos.ApplicationController = Ember.Controller.extend({});
