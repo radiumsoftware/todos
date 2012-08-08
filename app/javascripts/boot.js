@@ -1,3 +1,3 @@
-require('app');
+require('todos/app');
 
 Todos.initialize();
