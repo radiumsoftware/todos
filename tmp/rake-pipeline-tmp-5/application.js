@@ -1,31 +1,11 @@
 minispade.register('todos/templates/application', function() {Ember.TEMPLATES['application']=Ember.Handlebars.compile("<h1>Todos</h1>\n{{outlet}}\n");
 });minispade.register('todos/templates/main_view', function() {Ember.TEMPLATES['main_view']=Ember.Handlebars.compile("{{view Todos.CreateTodoView id=\"new-todo\" placeholder=\"What needs to be done?\"}}\n\n<div id=\"stats\">\n  {{#view Ember.Button target=\"Todos.TodosController\" action=\"clearCompletedTodos\"}}\n    Clear Completed Todos\n  {{/view}}\n\n  {{Todos.todosController.remaining}} remaining\n</div>\n\n{{view Ember.Checkbox class=\"mark-all-done\"\n  title=\"Mark All as Done\"\n  disabledBinding=\"Todos.TodosController.isEmpty\"\n  valueBinding=\"Todos.TodosController.allAreDone\"}}\n\n<ul>\n{{#each Todos.TodosController.content}}\n  <li {{bindAttr class=\"isDone\"}}>\n    {{view Ember.Checkbox titleBinding=\"title\" valueBinding=\"isDone\"}}\n  </li>\n{{/each}}\n</ul>\n");
 });minispade.register('todos/app', function() {Todos = Ember.Application.create();
+minispade.require('todos/router/main');
 minispade.require('todos/controllers/main');
 minispade.require('todos/templates/main');
 minispade.require('todos/models/main');
 minispade.require('todos/views/main');
-
-
-Todos.MainView = Ember.View.extend({
-  templateName: 'main_view'
-});
-
-Todos.Router = Ember.Router.extend({
-  enableLogging: true,
-  root: Ember.Route.extend({
-    index: Ember.Route.extend({
-      route: '/',
-      redirectsTo: 'todos'
-    }),
-    todos: Ember.Route.extend({
-      route: 'todos',
-      connectOutlets: function(router) {
-        router.get('applicationController').connectOutlet('main');
-      }
-    })
-  })
-});
 
 Todos.initialize();
 
@@ -70,6 +50,24 @@ minispade.require('todos/controllers/todos_controller');
 });minispade.register('todos/models/todo', function() {Todos.Todo = Ember.Object.extend({
   title: null,
   isDone: false
+});
+
+});minispade.register('todos/router/main', function() {minispade.require('todos/router/router');
+
+});minispade.register('todos/router/router', function() {Todos.Router = Ember.Router.extend({
+  enableLogging: true,
+  root: Ember.Route.extend({
+    index: Ember.Route.extend({
+      route: '/',
+      redirectsTo: 'todos'
+    }),
+    todos: Ember.Route.extend({
+      route: 'todos',
+      connectOutlets: function(router) {
+        router.get('applicationController').connectOutlet('main');
+      }
+    })
+  })
 });
 
 });minispade.register('todos/templates/main', function() {minispade.require('todos/templates/main_view');
