@@ -1,9 +1,8 @@
-Todos = Ember.Application.create();
-
-require('todos/controllers/main');
-require('todos/templates/main');
-require('todos/models/main');
-require('todos/views/main');
+minispade.register('todos/app', function() {Todos = Ember.Application.create();
+minispade.require('todos/controllers/main');
+minispade.require('todos/templates/main');
+minispade.require('todos/models/main');
+minispade.require('todos/views/main');
 
 
 Todos.MainView = Ember.View.extend({
@@ -27,3 +26,5 @@ Todos.Router = Ember.Router.extend({
 });
 
 Todos.initialize();
+
+});
