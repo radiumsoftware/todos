@@ -1,1 +1,0 @@
-Ember.TEMPLATES['application']=Ember.Handlebars.compile("<h1>Todos</h1>\n{{outlet}}\n");
