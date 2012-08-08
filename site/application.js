@@ -6,7 +6,6 @@ minispade.require('todos/templates/main');
 minispade.require('todos/models/main');
 minispade.require('todos/views/main');
 
-
 Todos.MainView = Ember.View.extend({
   templateName: 'main_view'
 });
@@ -26,6 +25,9 @@ Todos.Router = Ember.Router.extend({
     })
   })
 });
+
+
+});minispade.register('todos/boot', function() {minispade.require('app');
 
 Todos.initialize();
 

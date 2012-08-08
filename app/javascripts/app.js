@@ -5,7 +5,6 @@ require('todos/templates/main');
 require('todos/models/main');
 require('todos/views/main');
 
-
 Todos.MainView = Ember.View.extend({
   templateName: 'main_view'
 });
@@ -25,5 +24,3 @@ Todos.Router = Ember.Router.extend({
     })
   })
 });
-
-Todos.initialize();
