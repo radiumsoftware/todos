@@ -10,4 +10,12 @@ class Helper
     _iridium
 
 exports.casper = (options) ->
-  (new Helper).iridium().casper(options)
+  casper = (new Helper).iridium().casper(options)
+
+  casper.test.emberDidRender = (cbk) ->
+    casper.evaluate ->
+      window.Ember.run.end()
+    cbk.call casper
+
+  casper
+
