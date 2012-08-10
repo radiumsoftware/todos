@@ -1,1 +1,0 @@
-require('todos/models/todo');
