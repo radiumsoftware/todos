@@ -1,5 +1,8 @@
 <section id="todoapp">
-  {{ outlet }}
+  {{view "Todos.HeaderView"}}
+  {{view "Todos.MainView"}}
+  {{outlet}}
+  {{view "Todos.FooterView"}}
 </section>
 
 <footer id="info">
