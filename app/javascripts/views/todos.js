@@ -1,7 +1,7 @@
-(function( app ) {
+(function(app) {
 	'use strict';
 
-	var TodosView = Ember.CollectionView.extend({
+	app.TodosView = Ember.CollectionView.extend({
 		contentBinding: 'controller.entries',
 		tagName: 'ul',
 		elementId: 'todo-list',
@@ -45,7 +45,4 @@
 		})
 	});
 
-	app.TodosView = TodosView;
-
-})( window.Todos);
-
+})(window.Todos);

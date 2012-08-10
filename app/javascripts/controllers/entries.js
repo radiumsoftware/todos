@@ -1,4 +1,4 @@
-(function( app ) {
+(function(app) {
 	'use strict';
 
 	var Entries = Ember.ArrayProxy.extend({
@@ -68,6 +68,4 @@
 	app.EntriesController = Entries;
 	app.entriesController = Entries.create();
 
-
-})( window.Todos );
-
+})(window.Todos);

@@ -1,7 +1,7 @@
-(function( app ) {
+(function(app) {
 	'use strict';
 
-	var Store = function( name ) {
+	app.Store = function(name) {
 		this.name = name;
 		var store = localStorage.getItem( this.name );
 		this.data = ( store && JSON.parse( store ) ) || {};
@@ -67,7 +67,4 @@
 		};
 	};
 
-	app.Store = Store;
-
-})( window.Todos );
-
+})(window.Todos);

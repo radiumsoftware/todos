@@ -1,4 +1,4 @@
-(function( app ) {
+(function(app) {
 	'use strict';
 
 	app.Todo = Ember.Object.extend({
@@ -13,5 +13,5 @@
 		}.observes( 'title', 'completed' )
 	});
 
-})( window.Todos);
+})(window.Todos);
 

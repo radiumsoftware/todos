@@ -1,4 +1,4 @@
-(function( app ) {
+(function(app) {
 	'use strict';
 
 	var TodosController = Ember.Controller.extend({
@@ -21,5 +21,5 @@
 
 	app.TodosController = TodosController;
 
-})( window.Todos );
+})(window.Todos);
 

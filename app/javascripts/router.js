@@ -1,7 +1,7 @@
-(function( app ) {
+(function(app) {
 	'use strict';
 
-	var Router = Ember.Router.extend({
+	app.Router = Ember.Router.extend({
 		root: Ember.Route.extend({
 			showAll: Ember.Route.transitionTo( 'index' ),
 			showActive: Ember.Route.transitionTo( 'active' ),
@@ -39,7 +39,4 @@
 		})
 	});
 
-	app.Router = Router;
-
-})( window.Todos );
-
+})(window.Todos);
