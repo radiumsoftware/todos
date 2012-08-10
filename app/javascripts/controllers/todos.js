@@ -22,4 +22,3 @@
 	app.TodosController = TodosController;
 
 })(window.Todos);
-
