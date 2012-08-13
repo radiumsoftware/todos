@@ -46,6 +46,11 @@ test "should not be noneLeft", ->
 test "should not be all done", ->
   ok !Controllers.entriesController.get('allAreDone'), "not all done when 1 completed"
 
+test "should clear completed", ->
+  Controllers.entriesController.clearCompleted()
+  equal Controllers.entriesController.get('total'), 1, "1 total after clearCompleted"
+
+
 module "Controllers.Entries - 2 done and 0 undone todo", {
 setup: ->
   window.Controllers = Ember.Namespace.create();
@@ -73,7 +78,7 @@ test "should not be noneLeft", ->
 test "should be all done", ->
   ok Controllers.entriesController.get('allAreDone'), "all done with both completed"
 
-test "shold clear completed", ->
+test "should clear completed", ->
   Controllers.entriesController.clearCompleted()
   equal Controllers.entriesController.get('total'), 0, "0 total after clearCompleted"
 
