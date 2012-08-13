@@ -2,6 +2,7 @@ class Helper
   scripts: [
     'support/qunit',
     'iridium/qunit_adapter',
+    'unit/mock_store'
   ]
 
   iridium: ->

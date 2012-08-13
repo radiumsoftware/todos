@@ -1,63 +1,80 @@
 module "Controllers.Todo - empty todo list", {
 setup: ->
   window.Controllers = Ember.Namespace.create();
-  Controllers.todoController = Todos.TodosController.create({})
+  Controllers.todoController = Todos.TodosController.create({content: Ember.A()})
 }
 
 test "Should be empty with no todos", ->
-  ok Controllers.todoController.get('isEmpty'), "new controller is empty"
+  Ember.run =>
+    Controllers.todoController.set 'content.filterBy', ''
 
-test "Should have 0 remaining", ->
-  equal Controllers.todoController.get('remaining'), 0, "0 remaining"
+  equal Controllers.todoController.get('entries.length'), 0, "new controller is empty"
 
-test "Should not all be done", ->
-  equal Controllers.todoController.get('allAreDone'), false, "not all todos are done"
+test "Should have 0 active", ->
+  Ember.run =>
+    Controllers.todoController.set 'content.filterBy', 'active'
+
+  equal Controllers.todoController.get('entries.length'), 0, "0 active"
+
+test "Should have 0 completed", ->
+  Ember.run =>
+    Controllers.todoController.set 'content.filterBy', 'completed'
+
+  equal Controllers.todoController.get('entries.length'), false, "0 completed"
 
 module "Controllers.Todo - 1 done and 1 undone todo", {
   setup: ->
-    Controllers.todoController.clear()
-    Controllers.todoController.createTodo 'todo 1'
-    Controllers.todoController.createTodo 'todo 2'
-    Controllers.todoController.set 'firstObject.isDone', true
+    mock_store = new window.Todos.Store()
+
+    content = Ember.A([
+                window.Todos.Todo.create({title: 'todo 1', store: mock_store, completed: false}),
+                window.Todos.Todo.create({title: 'todo 2', store: mock_store, completed: true})
+              ])
+
+    Controllers.todoController = Todos.TodosController.create({content: content})
 }
 
-test "should not be empty", ->
-  equal Controllers.todoController.get('isEmpty'), false, "is not empty"
-
 test "should have 2 todos", ->
-  equal Controllers.todoController.get('length'), 2, "2 todos"
+  Ember.run =>
+    Controllers.todoController.set 'content.filterBy', ''
 
-test "should have 1 remaining", ->
-  equal Controllers.todoController.get('remaining'), 1, "1 remaining"
+  equal Controllers.todoController.get('entries.length'), 2, "new controller has 2 todos"
 
-test "should have 1 todo after calling clearCompletedTodos", ->
-  Controllers.todoController.clearCompletedTodos()
-  equal Controllers.todoController.get('length'), 1, "1 todo after clearCompletedTodos"
+test "should have 1 active", ->
+  Ember.run =>
+    Controllers.todoController.set 'content.filterBy', 'active'
 
-test "Should not all be done", ->
-  equal Controllers.todoController.get('allAreDone'), false, "not all todos are done"
+  equal Controllers.todoController.get('entries.length'), 1, "1 active"
+
+test "Should have 1 completed", ->
+  Ember.run =>
+    Controllers.todoController.set 'content.filterBy', 'completed'
+
+  equal Controllers.todoController.get('entries.length'), 1, "1 completed"
 
 module "Controllers.Todo - 2 done todos", {
   setup: ->
-    Controllers.todoController.clear()
-    Controllers.todoController.createTodo 'todo 1'
-    Controllers.todoController.createTodo 'todo 2'
-    Controllers.todoController.forEach (todo) -> todo.set 'isDone', true
+    mock_store = new window.Todos.Store()
+
+    content = Ember.A([
+                window.Todos.Todo.create({title: 'todo 1', store: mock_store, completed: true}),
+                window.Todos.Todo.create({title: 'todo 2', store: mock_store, completed: true})
+              ])
+
+    Controllers.todoController = Todos.TodosController.create({content: content})
 }
 
-test "should have 0 todos remaining", ->
-  equal Controllers.todoController.get('remaining'), 0, "0 remaining"
+test "should have 0 active", ->
+  Ember.run =>
+    Controllers.todoController.set 'content.filterBy', 'active'
 
-test "Should all be done", ->
-  ok Controllers.todoController.get('allAreDone'), "all todos are done"
+  equal Controllers.todoController.get('entries.length'), 0, "0 active"
 
-test "should have no todos after calling clearCompletedTodos", ->
-  Controllers.todoController.clearCompletedTodos()
-  equal Controllers.todoController.get('length'), 0, "no todo after clearCompletedTodos"
+test "Should have 2 completed", ->
+  Ember.run =>
+    Controllers.todoController.set 'content.filterBy', 'completed'
 
-test "should be empty after calling clearCompletedTodos on completed todo list", ->
-  Controllers.todoController.clearCompletedTodos()
-  ok Controllers.todoController.get('isEmpty'), "empty on completed list"
+  equal Controllers.todoController.get('entries.length'), 2, "2 completed"
 
 
 
