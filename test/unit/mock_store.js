@@ -2,7 +2,7 @@
 	'use strict';
 
 	app.Store = function(name) {
-		this.data = [];
+		this.data = {};
 
 		// Wrapper around `this.create`
 		// Creates a `Todo` model object out of the title

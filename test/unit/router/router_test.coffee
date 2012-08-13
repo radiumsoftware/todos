@@ -11,12 +11,10 @@ test "default route is index", ->
 
 test "route to active", ->
   Todos.router.route '/active'
-  console.log Todos.router.get('currentState.path')
   equal Todos.router.get('currentState.path'), 'root.active', "in active"
 
 test "route to completed", ->
   Todos.router.route '/completed'
-  console.log Todos.router.get('currentState.path')
   equal Todos.router.get('currentState.path'), 'root.completed', "in completed"
 
 

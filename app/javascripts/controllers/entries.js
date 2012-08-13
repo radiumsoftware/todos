@@ -57,6 +57,7 @@
 
 		init: function() {
 			this._super();
+      this.set('content', Ember.A());
 			// Load items if any upon initialization
 			var items = this.get( 'store' ).findAll();
 			if ( items.get( 'length' ) ) {
